@@ -1,0 +1,28 @@
+﻿@model PhoneJZ.App_Data.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div style="padding:20px 30px 20px 30px; background:white; border-radius:15px; text-align:center;">
+    <h2>Xóa Sản Phẩm (@Model.Id)</h2>
+
+    <img src="~/images/@Model.image" height="100" />
+    <div style="height:20px"></div>
+    <div style="display: flex; justify-content: center;"><strong>@Html.DisplayNameFor(model => model.name):</strong> <p><div style="width:10px;"></div> @Html.DisplayFor(model => model.name)</p></div>
+    <div style="height:20px"></div>
+    <div style="display: flex; justify-content: center;"><strong>@Html.DisplayNameFor(model => model.price):</strong> <p><div style="width:10px;"></div> @Html.DisplayFor(model => model.price)</p></div>
+    <div style="height:20px"></div>
+    <div style="display: flex; justify-content: center;"><strong>@Html.DisplayNameFor(model => model.Category1.name):</strong> <p><div style="width:10px;"></div> @Html.DisplayFor(model => model.Category1.name)</p></div>
+    <div style="height:60px"></div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa Sản Phẩm" class="btn" style="background: black; color:white; opacity:0.7" />
+            <a href="/Products" class="btn col" style="background:white; color:black;"><i class="fa fa-reply"></i> Quay Về</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,32 @@
+﻿@model PhoneJZ.App_Data.Category
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<div style="padding:20px 30px 20px 30px; background:white; border-radius:15px;">
+    <h2 style="text-align:center">Thêm Thể Loại</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+            <div style="height:25px"></div>
+            <div class="row mb-3">
+                <input type="submit" value="Thêm Thể Loại" class="btn" style="background: black; color:white; opacity:0.7" />
+            </div>
+        </div>
+        <a href="/Categories" class="btn col" style="background:white; color:black;"><i class="fa fa-reply"></i> Quay Về</a>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

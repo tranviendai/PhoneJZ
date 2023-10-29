@@ -1,0 +1,68 @@
+﻿@model PhoneJZ.App_Data.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div style="padding:20px 30px 20px 30px; background:white; border-radius:15px;">
+    <h2 style="text-align:center">Cập Nhật Sản Phẩm</h2>
+    @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new
+    {
+        @enctype = "multipart/form-data"
+    }))
+    {
+        @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+    </div>
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+    </div>
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.discount, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        @Html.EditorFor(model => model.discount, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.discount, "", new { @class = "text-danger" })
+    </div>
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.category, "Danh Mục", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        @Html.DropDownList("category", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.category, "", new { @class = "text-danger" })
+    </div>
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.category, "Hình Ảnh Hiện Tại", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+    </div>
+    <div style="display:none;"> @Html.EditorFor(model => model.image)</div>
+    <img src="~/images/@Model.image" height="50" width="50" />
+    <div class="row mb-3">
+        @Html.LabelFor(model => model.image, "Hình Ảnh Cập Nhật", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <input type="file" name="image" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+        @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+    </div>
+    <div style="height:25px">
+
+    </div>
+    <div class="row mb-3">
+        <input type="submit" value="Thêm Sản Phẩm" class="btn" style="background: black; color:white; opacity:0.7" />
+    </div>
+</div>
+        <a href="/Products" class="btn col" style="background:white; color:black;"><i class="fa fa-reply"></i> Quay Về</a>
+
+    }
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

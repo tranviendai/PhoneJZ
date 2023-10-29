@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="background:whitesmoke">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark fixed-top" style="background: #f94c2f">
+        <div class="container">
+            @Html.ActionLink("PhoneStore", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (User.Identity.Name == "admin@gmail.com")
+                    {
+                        <li>@Html.ActionLink("Thể Loại", "Index", "Categories", new { area = "" }, new { @class = "nav-link text-white" })</li>
+                        <li>@Html.ActionLink("Sản Phẩm", "Index", "Products", new { area = "" }, new { @class = "nav-link text-white" })</li>
+                        <li>@Html.ActionLink("Đơn Hàng", "Index", "Bills", new { area = "" }, new { @class = "nav-link text-white" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Trang Chủ", "Index", "Home", new { area = "" }, new { @class = "nav-link text-white" })</li>
+                        <li>@Html.ActionLink("Về Chúng Tôi", "About", "Home", new { area = "" }, new { @class = "nav-link text-white" })</li>
+                        <li>@Html.ActionLink("Liên Hệ", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-white" })</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content" style="margin-top:70px;">
+        @RenderBody()
+    </div>
+   
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

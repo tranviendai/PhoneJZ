@@ -1,0 +1,133 @@
+﻿@using PhoneJZ.Models
+@model Cart
+
+@{
+    ViewBag.Title = "ShowCart";
+    decimal totalPrice = 0;
+}
+
+
+@if (Model.Total() != 0)
+{
+    <h2 class="text-center">Giỏ Hàng Của Tôi</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Hình Ảnh</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá Tiền</th>
+                <th>Số lượng</th>
+                <th>Tổng tiền</th>
+                <th>Hành động</th>
+            </tr>
+            @foreach (var item in Model.Items)
+            {
+                decimal total = Convert.ToDecimal(item.product.totalPrice * item.quantity);
+                <tr>
+                    <td>
+                        <img src="~/Images/@item.product.image" style="height: 50px;" />
+                    </td>
+                    <td class="text-dark" style="font-size: 20px;">@item.product.name</td>
+                    <td class="text-dark" style="font-size: 20px;">@Html.Label("", string.Format("{0:N0}", @item.product.totalPrice), new { style = "font-weight:initial !important;" })</td>
+                    <td>
+                        @using (Html.BeginForm("UpdateCart", "Cart"))
+                        {
+                            <input type="hidden" value="@item.product.Id" name="Id" />
+                            <div>
+                                <input type="number" value="@item.quantity" name="quantity" style="width:60px; height:35px; border-radius: 4px; border:0.2px solid; text-align: center" />
+                                <input type="submit" value="Cập Nhật" class="btn btn-dark" />
+                            </div>
+                        }
+                    </td>
+                    <td>@Html.Label("", string.Format("{0:N0}", total), new { style = "display:contents; font-size:20px;", @class = "text-dark" })</td>
+                    <td class="action">
+                        <a href="/Cart/RemoveCart/@item.product.Id" style="color: red; text-decoration: none; font-size:26px;">
+                            <span class="fas fa-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+                totalPrice += total;
+            }
+            <tr style="font-weight:bold; text-align:right; color:red;">
+                <td colspan="6"><span style="margin-right: 5px">Tổng tiền:  <span> @Html.Label("", string.Format("{0:N0}", Model.Total()), new { style = "float:right;" })</span></span></td>
+            </tr>
+        </thead>
+
+    </table>
+    using (Html.BeginForm("CheckOut", "Cart"))
+    {
+<div class="row" style="display:inline-table; float:right;">
+    <div class="form-group col">
+        <div class="mb-3 mt-3">
+            <label>Tên Người Nhận</label>
+        </div>
+        <div class="mb-3 mt-3">
+            <input type="text" name="shipName" required class="form-control" />
+        </div>
+    </div>
+    <div class="form-group col">
+        <div class="mb-3 mt-3">
+            <label>Địa Chỉ Nhận</label>
+        </div>
+        <div class="mb-3 mt-3">
+            <input type="text" name="shipAddress" required class="form-control" />
+        </div>
+    </div>
+    <input type="text" name="totalPrice" value="@totalPrice" hidden class="form-control" />
+    <input type="submit" value="Đặt Hàng" class="btn" style="background: #f94c2f; color:white; width:100%;" />
+
+</div>
+    }
+}
+else
+{
+    <br />
+    <pre style="text-align:center; color:red;">Bạn chưa có gì trong giỏ hàng, xin mời bạn quay vào trang chủ để chọn sách nhé >.<    
+<a href="~/Home" style="text-decoration: none;">Ấn Vào Đây Nè</a></pre>
+
+}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    thead {
+        color: #056a3bb3;
+    }
+
+    th, td {
+        text-align: left;
+    }
+
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    tr:first-child {
+        background: #f94c2fcc;
+        color: white;
+    }
+
+
+    tr:nth-child(even) {
+        background-color: #ffecdd26;
+    }
+    tr:last-child {
+        background: white;
+    }
+    .linkPro {
+        text-decoration: none;
+        background: black;
+        opacity: 0.5;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+        .linkPro:hover {
+            opacity: 1;
+            color: white;
+        }
+</style>

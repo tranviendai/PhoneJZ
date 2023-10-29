@@ -1,0 +1,120 @@
+﻿@model IEnumerable<PhoneJZ.App_Data.Product>
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container">
+    <img src="~/fixed/banner01.png" style="width:100%" />
+    <div style="height:20px"></div>
+    @{
+        Html.RenderPartial("_CategoryPartial", ViewData["GetCategory"]);
+    }
+<div class="bg-white" style="padding: 30px 10px 30px 10px; border-radius: 5px;">
+    @if (Model.Count() < 1)
+    {
+        <div style="height:200px;">
+            <h1 class="text-center">Chưa có dữ liệu về loại hàng này</h1>
+            <h3 class="text-center">Quay lại trang chủ? <a href="/" style="text-decoration:none;">Quay về</a></h3>
+        </div>
+    }
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-3 row-cols-xl-5 g-4 g-2" id="listPro">
+
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <a id="card-pro" href="/Products/Details/@item.Id.ToString()" title="@item.name" data-id="@item.Id">
+                    <img src="/images/@item.image" class="card-img-top" style="padding:25px" alt="Sản phẩm">
+                    @if (item.discount != 0)
+                    {
+                        <div class="product-discount">-@item.discount%</div>
+                    }
+                    <div class="card-body" style="padding: 0">
+                        <h5 class="card-title">@item.name</h5>
+                    </div>
+                    <div class="price">
+                        @if (item.discount != 0)
+                        {
+                            <span class="price-undiscounted"><span class="vnd">₫</span>@Html.DisplayFor(model => item.price)</span>
+                        }
+                        <strong><span class="vnd">₫</span>@Html.DisplayFor(model => item.totalPrice)</strong>
+                    </div>
+                </a>
+                <a href="/Cart/AddCart/@item.Id" data-id="@item.Id" class="btn select-order" style="width:100%; margin-top:8px;">MUA</a>
+
+            </div>
+        }
+
+    </div>
+</div>
+</div>
+
+<style>
+    .product-discount {
+        padding: 5px;
+        font-weight: bold;
+        font-size: 13px;
+        border-radius: 0 5px 0 5px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: white;
+        background: #e54747;
+    }
+
+    #listPro a {
+        text-decoration: none;
+    }
+
+    .card-title {
+        color: black;
+    }
+
+    #card-pro {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0.5px solid rgba(0,0,0,.125);
+        border-radius: 0.25rem;
+        padding: 8px;
+        text-decoration: none;
+        color: black;
+        height: 88%;
+        transition: 0.3s;
+        opacity: 0.97;
+    }
+
+    .price-undiscounted {
+        font-size: 1rem;
+        text-decoration: line-through;
+        color: #929292;
+        margin-right: 5px;
+    }
+
+    .vnd {
+        font-size: 1rem
+    }
+
+    .select-order {
+        border-radius: 5px;
+        background: white;
+        color: black;
+        border: 0.5px solid rgba(0,0,0,.125);
+        font-weight: 500;
+    }
+
+        .select-order:hover {
+            border-radius: 5px;
+            background: white;
+            color: black;
+            font-weight: 500;
+            border: 1px solid rgba(0,0,0,.125);
+        }
+
+    .price {
+        color: red;
+    }
+</style>

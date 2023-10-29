@@ -1,0 +1,13 @@
+﻿@model IEnumerable<PhoneJZ.App_Data.Category>
+@{
+    ViewBag.Title = "_CategoryPartial";
+}
+
+<div class="row bg-white g-2" style="margin:0; border-radius:5px;">
+    <h5 class="col text-center"><a style="text-decoration:none; color:black;" href="/">Tất Cả</a></h5>
+    @foreach (var item in Model)
+    {
+        <h5 class="col text-center"><a style="text-decoration:none; color:black;" href="?category=@item.name">@item.name</a></h5>
+    }
+</div>
+<div style="height:10px;"></div>

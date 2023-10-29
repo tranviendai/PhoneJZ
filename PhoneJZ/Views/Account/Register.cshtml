@@ -1,0 +1,35 @@
+﻿@model PhoneJZ.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Đăng Ký";
+}
+<div style="height:50px;"></div>
+<main aria-labelledby="title" style="text-align:center; padding:50px 25% 50px 25%;">
+    <div id="loginForm" style="padding:50px; background: white; border-radius:20px; border:1px solid;">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+        {
+            <h2 id="title">@ViewBag.Title</h2>
+            <div style="height:10px;"></div>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="row g-2">
+                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="row g-2">
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Mật Khẩu", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="row g-2">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Xác Nhận Mật khẩu", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+            <div class="row g-2">
+                <input type="submit" value="Đăng Ký" class="btn" style="background: #f94c2f; color:white;" />
+            </div>
+        }
+    </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<PhoneJZ.App_Data.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div style="padding:20px 30px 20px 30px; background:white; border-radius:15px;">
+    <h2 class="text-center">Trang Danh Sách</h2>
+    <div style="height:10px;"></div>
+    <p style="text-align:right;">
+        @Html.ActionLink("Thêm Mới?", "Create", null, new { @class = "linkPro" })
+    </p>
+    <table class="table">
+        <tr style="">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.Id})" style="color: green; text-decoration: none; font-size:24px;">
+                        <span class="fas fa-edit"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })" style="color: red; text-decoration: none; font-size: 24px;">
+                        <span class="fas fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    thead {
+        color: #056a3bb3;
+    }
+
+    th, td {
+        text-align: left;
+    }
+
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    tr:first-child {
+        background: #f94c2fcc;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #ffecdd26;
+    }
+
+    .linkPro {
+        text-decoration: none;
+        background: black;
+        opacity: 0.5;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+        .linkPro:hover {
+            opacity: 1;
+            color: white;
+        }
+</style>

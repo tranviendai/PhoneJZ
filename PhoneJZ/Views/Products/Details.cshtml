@@ -1,0 +1,67 @@
+﻿@model PhoneJZ.App_Data.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container bg-white p-5" style="border-radius:5px;">
+    <div class="row">
+        <div class="col-md-5">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <img src="/images/@Model.image" class="d-block w-100" alt="Ảnh sản phẩm">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="name">
+                <h2>@Model.name</h2>
+            </div>
+            <div class="price">
+                @if (Model.discount != 0)
+                {
+                    <span class="price-undiscounted"><span class="vnd">₫</span>@Html.DisplayFor(model => Model.price)</span> <span style="color:white;background:red;border-radius:5px; padding:5px;">Giảm @Model.discount%</span>
+                    <div style="height:20px;"></div>
+                }
+
+                <h3 style="color:red;"><span class="vnd">₫</span>@Html.DisplayFor(model => Model.totalPrice)</h3>     
+                <a href="/Cart/AddCart/@Model.Id" data-id="@Model.Id" class="btn select-order" style="width:100%; margin-top:8px;">MUA</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div style="height:20px"></div>
+<div class=" bg-white p-5 col">
+    <div style="word-wrap: break-word">
+        <h2><strong style="color: #f94c2f; margin-right: 5px;">l</strong>Thông Tin Sản Phẩm</h2>
+        <hr />
+        <ul class="description-pro">
+            <li>@Html.Raw(Model.description)</li>
+        </ul>
+
+    </div>
+</div>
+<style>
+    .price-undiscounted {
+        font-size: 1rem;
+        text-decoration: line-through;
+        color: #929292;
+        margin-right: 5px;
+    }
+
+    .vnd {
+        font-size: 1rem
+    }
+
+    .select-order {
+        border-radius: 5px;
+        background: black;
+        color: white;
+        font-weight: 500;
+    }
+    .select-order:hover {
+        border-radius: 5px;
+        background: black;
+        color: white;
+        font-weight: 500;
+    }
+</style>

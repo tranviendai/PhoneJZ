@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PhoneJZ.App_Data.OrderPro>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Hóa Đơn Của Bạn</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dateOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", new { id = item.Id })" style="color: blue; text-decoration: none; font-size: 24px;">
+                <span class="fas fa-eye"></span>
+            </a>
+     
+        </td>
+    </tr>
+}
+
+</table>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    thead {
+        color: #056a3bb3;
+    }
+
+    th, td {
+        text-align: left;
+    }
+
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+
+    tr:first-child {
+        background: #f94c2fcc;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #ffecdd26;
+    }
+
+    .linkPro {
+        text-decoration: none;
+        background: black;
+        opacity: 0.5;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+        .linkPro:hover {
+            opacity: 1;
+            color: white;
+        }
+</style>
